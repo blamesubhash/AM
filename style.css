@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top right, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+  }
+  
+  .container {
+    text-align: center;
+    color: white;
+    padding-top: 100px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite alternate;
+  }
+  
+  .message {
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  
+  .cake {
+    position: relative;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .plate {
+    width: 200px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .layer {
+    width: 160px;
+    height: 40px;
+    background: #ff69b4;
+    border-radius: 5px;
+    position: absolute;
+    left: 20px;
+  }
+  
+  .layer-bottom {
+    bottom: 20px;
+  }
+  .layer-middle {
+    bottom: 60px;
+    background: #ff85a2;
+  }
+  .layer-top {
+    bottom: 100px;
+    background: #ffbfd4;
+  }
+  
+  .candle {
+    width: 10px;
+    height: 40px;
+    background: #fff;
+    position: absolute;
+    top: 20px;
+    left: 95px;
+    box-shadow: 0 0 10px 3px #ff0;
+  }
+  
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+  }
+  
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  

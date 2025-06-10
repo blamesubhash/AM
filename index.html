@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .fade-in {
+      animation: fadeIn 2s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+    }
+
+    .fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: yellow;
+      border-radius: 50%;
+      animation: sparkle-animation 1s ease-out forwards;
+    }
+
+    @keyframes sparkle-animation {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(3) translateY(-50px); }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 60px;
+      background: radial-gradient(circle at 30% 30%, #ff69b4, #ff1493);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: floatBalloon 6s ease-in infinite;
+    }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(100vh) scale(1); }
+      100% { transform: translateY(-100vh) scale(1.2); }
+    }
+
+    .glow-title {
+      background: linear-gradient(90deg, #fff, #ff69b4, #fff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowSweep 4s linear infinite;
+    }
+
+    @keyframes glowSweep {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+  </style>
+</head>
+<body onclick="spawnSparkle(event)">
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <h1 class="title glow-title">🎉 Happy Birthday [Name]! 🎉</h1>
+    <p class="message">
+      Wishing you a day filled with love, laughter, and unforgettable moments.
+      May this year bring you success, joy, and everything you dream of!
+    </p>
+    <div class="cake animated fade-in">
+      <div class="plate"></div>
+      <div class="layer layer-bottom"></div>
+      <div class="layer layer-middle"></div>
+      <div class="layer layer-top"></div>
+      <div class="candle"></div>
+    </div>
+    <button class="btn" onclick="showGift()">🎁 Open Gift</button>
+    <div class="gift-message" id="giftMessage" style="display: none; font-size: 1.8rem; margin-top: 20px; color: #fff; background: rgba(255, 105, 180, 0.7); padding: 15px; border-radius: 10px; transition: all 1s ease; transform: scale(0.5); opacity: 0;">🎊 Surprise! You're loved more than you know. 🎊</div>
+  </div>
+  <div class="fireworks" id="fireworks"></div>
+
+  <script>
+    function showGift() {
+      const msg = document.getElementById('giftMessage');
+      msg.style.display = 'block';
+      setTimeout(() => {
+        msg.style.opacity = 1;
+        msg.style.transform = 'scale(1)';
+      }, 10);
+      launchFireworks();
+      launchBalloons();
+    }
+
+    function launchFireworks() {
+      const fireworks = document.getElementById('fireworks');
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        fireworks.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+      }
+    }
+
+    function launchBalloons() {
+      const fireworks = document.getElementById('fireworks');
+      for (let i = 0; i < 10; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = `${Math.random() * 100}%`;
+        balloon.style.animationDuration = `${4 + Math.random() * 4}s`;
+        fireworks.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 8000);
+      }
+    }
+
+    function spawnSparkle(e) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.top = `${e.clientY}px`;
+      sparkle.style.left = `${e.clientX}px`;
+      sparkle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
